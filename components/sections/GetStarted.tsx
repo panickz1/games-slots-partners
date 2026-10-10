@@ -2,6 +2,7 @@ import { en } from "@/content/en";
 import { CONTACT } from "@/lib/config";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Steps } from "./Steps";
 
 export function GetStarted() {
   const { start } = en;
@@ -12,15 +13,7 @@ export function GetStarted() {
         <SectionHeader label={start.label} title={start.title} />
 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-          <ol className="self-start divide-y divide-line border-y border-line">
-            {start.steps.map((s, i) => (
-              <li key={s.title} className="grid gap-2 py-6 sm:grid-cols-[3rem_10rem_1fr] sm:gap-4">
-                <span className="font-mono text-sm text-gold-soft">{i + 1}.</span>
-                <h3 className="font-bold">{s.title}</h3>
-                <p className="text-muted">{s.text}</p>
-              </li>
-            ))}
-          </ol>
+          <Steps steps={start.steps} />
 
           <div className="space-y-10">
             <div>

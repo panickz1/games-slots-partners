@@ -34,7 +34,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={montserrat.variable}>
+    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
+      <head>
+        {/* Lets CSS hide scroll-reveal content only when JS will reveal it */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="font-sans">
         <Header />
         {children}

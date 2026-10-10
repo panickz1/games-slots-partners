@@ -7,26 +7,38 @@ const KEY = "gs-partners-cookies";
 
 export function CookieBanner() {
   const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let stored: string | null = null;
     try {
-      if (!localStorage.getItem(KEY)) setShow(true);
-    } catch {
+      stored = localStorage.getItem(KEY);
+    } catch {}
+    if (stored) return;
+    // Wait a beat so the banner doesn't compete with the hero entrance
+    const t = setTimeout(() => {
       setShow(true);
-    }
+      requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
+    }, 1000);
+    return () => clearTimeout(t);
   }, []);
 
   const choose = (value: "accepted" | "declined") => {
     try {
       localStorage.setItem(KEY, value);
     } catch {}
-    setShow(false);
+    setVisible(false);
+    setTimeout(() => setShow(false), 400);
   };
 
   if (!show) return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-md items-center gap-4 rounded-xl border border-line bg-surface-2/95 p-4 shadow-2xl backdrop-blur md:left-6 md:mx-0">
+    <div
+      className={`fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-md items-center gap-4 rounded-xl border border-line bg-surface-2/95 p-4 shadow-2xl backdrop-blur transition-all duration-500 ease-out-soft md:left-6 md:mx-0 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+      }`}
+    >
       <p className="flex-1 text-xs text-muted">
         {en.cookie.text}{" "}
         <a href="/cookies/" className="text-white underline underline-offset-2 hover:text-gold">

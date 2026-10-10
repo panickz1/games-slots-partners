@@ -20,7 +20,7 @@ const variants = {
 export function Button({ variant = "gold", size = "md", className = "", ...rest }: Props) {
   return (
     <a
-      className={`inline-flex items-center justify-center gap-2 rounded-lg font-bold whitespace-nowrap transition-all duration-300 ${sizes[size]} ${variants[variant]} ${className}`}
+      className={`group inline-flex items-center justify-center gap-2 rounded-lg font-bold whitespace-nowrap transition-all duration-300 active:scale-[0.98] ${sizes[size]} ${variants[variant]} ${className}`}
       {...rest}
     />
   );

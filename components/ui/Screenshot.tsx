@@ -9,17 +9,20 @@ export function Screenshot({
   label,
   className = "",
   priority = false,
+  style,
 }: {
   src: string;
   label: string;
   className?: string;
   priority?: boolean;
+  style?: React.CSSProperties;
 }) {
   const exists = fs.existsSync(path.join(process.cwd(), "public", src));
 
   return (
     <figure
       className={`overflow-hidden rounded-xl border border-line bg-surface ${className}`}
+      style={style}
     >
       {exists ? (
         <img

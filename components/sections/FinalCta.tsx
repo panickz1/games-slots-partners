@@ -1,6 +1,7 @@
 import { en } from "@/content/en";
 import { LOGIN_URL, REGISTER_URL } from "@/lib/config";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 
 export function FinalCta() {
   const { finalCta, cta } = en;
@@ -15,6 +16,7 @@ export function FinalCta() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button href={REGISTER_URL} size="lg">
             {cta.register}
+            <Icon name="arrow" className="size-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Button>
           <Button href={LOGIN_URL} variant="ghost" size="lg">
             {cta.login}
